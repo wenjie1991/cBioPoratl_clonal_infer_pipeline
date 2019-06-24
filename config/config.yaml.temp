@@ -1,0 +1,31 @@
+base_measure_params:
+  alpha: 1
+  beta: 1
+density: pyclone_beta_binomial
+beta_binomial_precision_params:
+  prior:
+    rate: 0.001
+    shape: 1.0
+  proposal:
+    precision: 0.01
+  value: 1000
+concentration:
+  value: 1.0
+  prior:
+    shape: 1.0
+    rate: 0.001
+num_iters: 10000
+trace_dir: trace
+
+# samples:
+#   R1:
+#     mutations_file: $pyclone_dir/yaml/$yaml_file1
+#     tumour_content:
+#       value: 1.0
+#     error_rate: 0.001
+#   R2:
+#     mutations_file: $pyclone_dir/yaml/$yaml_file2
+#     tumour_content:
+#       value: 1.0
+#     error_rate: 0.001
+# working_dir: $pyclone_dir/
