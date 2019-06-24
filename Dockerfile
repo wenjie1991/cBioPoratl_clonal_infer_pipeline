@@ -11,13 +11,15 @@ COPY . /run_pyclone
 RUN apt-get update --fix-missing
 
 # Install R
-RUN apt-get install -y r-base-core perl6 && \
+RUN apt-get install -y r-base-core && \
         rm -rf /var/lib/apt/lists/* && \
         Rscript -e 'install.packages("data.table", repos="https://cran.rstudio.com")'
 
 # Install perl6
 RUN wget https://github.com/nxadm/rakudo-pkg/releases/download/v2019.03.1/rakudo-pkg-Debian9_2019.03.1-01_amd64.deb && \ 
-        dpkg -i *.deb &&
+        dpkg -i *.deb && \
+        echo "PATH=~/.perl6/bin:/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bin:$PATH" >> ~/.bashrc
+
 ENV PATH ~/.perl6/bin:/opt/rakudo-pkg/bin:/opt/rakudo-pkg/share/perl6/site/bin:$PATH
 RUN zef install YAMLish
 
