@@ -3,13 +3,12 @@ args = commandArgs(trailingOnly=TRUE)
 
 ## Library
 if (!(require(data.table))) install.packages("data.table")
-if (!(require(magrittr))) install.packages("magrittr") 
 
 #-------------------------------------------------
 # args:
 #-------------------------------------------------
 ## sampleID is a string, each sampleID sepearted by ","
-sampleID = args[1] %>% strsplit(",") %>% unlist
+sampleID = unlist(strsplit(args[1], ","))
 ## TODO: the output fold should be exist or need to create here
 output_prefix = args[2]
 ## THe copy number variation input file: "data_cna_hg19.seg" in the cbioportal datasets
