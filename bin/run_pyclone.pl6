@@ -13,6 +13,7 @@ sub MAIN ($output-fold, $sampleID, $dataset-fold, $config-yaml-temp = "./config/
     my $tables-fold = $output-fold ~ "/tables/";
 
     mkdir $output-fold;
+    mkdir $tables-fold;
 
     # Run:
     ## Step1. Prepare the mutation & cnv table using cbioportal datasets
