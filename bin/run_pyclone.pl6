@@ -11,7 +11,7 @@ sub MAIN ($output-fold, $sampleID, $dataset-fold, $config-yaml-temp = "./config/
     my $yaml-fold = $output-fold ~ "/yaml/";
     my $config-yaml-file = $output-fold ~ "/config.yaml";
     my $tables-fold = $output-fold ~ "/tables/";
-    my $tables-file-name = $tables-fold ~ "mutation_cluster.tsv";
+    my $tables-file = $tables-fold ~ "mutation_cluster.tsv";
 
     mkdir $output-fold;
     mkdir $tables-fold;
@@ -25,9 +25,9 @@ sub MAIN ($output-fold, $sampleID, $dataset-fold, $config-yaml-temp = "./config/
         %sample-info{$sampleID}<yaml-file> = prepare-sample-mutation-yaml($sampleID, %info<tsv-file>, $yaml-fold);
     }
 
-#    prepare-pyclone-config(%sample-info, $config-yaml-temp, $config-yaml-file, $output-fold);
-#    run-pyclone($config-yaml-file);
-    pyclone-build-table($config-yaml-file, $tables-file-name);
+    prepare-pyclone-config(%sample-info, $config-yaml-temp, $config-yaml-file, $output-fold);
+    run-pyclone($config-yaml-file);
+    pyclone-build-table($config-yaml-file, $tables-file);
 
 }
 
@@ -85,6 +85,6 @@ sub run-pyclone ($config-yaml-file) {
 }
 
 ## Build loci tables
-sub pyclone-build-table ($config-yaml-file, $tables-file-name) {
-    shell "PyClone build_table --config_file $config-yaml-file --out_file $tables-file-name --table_type loci";
+sub pyclone-build-table ($config-yaml-file, $tables-file) {
+    shell "PyClone build_table --config_file $config-yaml-file --out_file $tables-file --table_type loci";
 }
